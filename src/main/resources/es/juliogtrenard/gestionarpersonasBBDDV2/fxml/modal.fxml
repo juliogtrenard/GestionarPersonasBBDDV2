@@ -6,7 +6,7 @@
 
 <VBox stylesheets="@../css/style.css" alignment="CENTER" maxHeight="200.0" maxWidth="500.0" minHeight="200.0" minWidth="500.0" prefHeight="200.0" prefWidth="500.0" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="es.juliogtrenard.gestionarpersonasBBDDV2.controladores.ControladorModal">
    <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
-      <Label text="Nombre">
+      <Label text="%modal.nombre">
          <HBox.margin>
             <Insets right="20.0" />
          </HBox.margin>
@@ -14,7 +14,7 @@
       <TextField fx:id="txtNombre" prefWidth="350.0" />
    </HBox>
    <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
-      <Label text="Apellidos">
+      <Label text="%modal.apellidos">
          <HBox.margin>
             <Insets right="20.0" />
          </HBox.margin>
@@ -25,7 +25,7 @@
       <VBox.margin>
          <Insets />
       </VBox.margin>
-      <Label text="Edad">
+      <Label text="%modal.edad">
          <HBox.margin>
             <Insets right="20.0" />
          </HBox.margin>
@@ -36,11 +36,11 @@
       </padding>
    </HBox>
    <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
-      <Button mnemonicParsing="false" onAction="#guardarPersona" text="Guardar">
+      <Button mnemonicParsing="false" onAction="#guardarPersona" text="%guardar">
          <HBox.margin>
             <Insets right="50.0" />
          </HBox.margin>
       </Button>
-      <Button mnemonicParsing="false" onAction="#cerrarVentana" text="Cancelar" />
+      <Button mnemonicParsing="false" onAction="#cerrarVentana" text="%cancelar" />
    </HBox>
 </VBox>

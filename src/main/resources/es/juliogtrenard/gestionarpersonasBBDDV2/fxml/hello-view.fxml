@@ -12,7 +12,7 @@
          <HBox.margin>
             <Insets bottom="20.0" right="15.0" top="10.0" />
          </HBox.margin></ImageView>
-        <Label text="Filtrar por nombre:">
+        <Label text="%filtroNombre">
            <HBox.margin>
                <Insets right="10.0" />
            </HBox.margin>
@@ -21,17 +21,17 @@
     </HBox>
     <TableView fx:id="tvTabla" maxHeight="600.0" maxWidth="800.0" prefHeight="300.0" prefWidth="400.0" VBox.vgrow="NEVER">
         <columns>
-            <TableColumn editable="false" prefWidth="126.0" text="NOMBRE">
+            <TableColumn editable="false" prefWidth="126.0" text="%tabla.nombre">
                 <cellValueFactory>
                     <PropertyValueFactory property="nombre" />
                 </cellValueFactory>
             </TableColumn>
-            <TableColumn editable="false" prefWidth="154.0" text="APELLIDOS">
+            <TableColumn editable="false" prefWidth="154.0" text="%tabla.apellidos">
                 <cellValueFactory>
                     <PropertyValueFactory property="apellidos" />
                 </cellValueFactory>
             </TableColumn>
-            <TableColumn editable="false" prefWidth="139.0" text="EDAD">
+            <TableColumn editable="false" prefWidth="139.0" text="%tabla.edad">
                 <cellValueFactory>
                     <PropertyValueFactory property="edad" />
                 </cellValueFactory>
@@ -45,17 +45,17 @@
       </columnResizePolicy>
     </TableView>
     <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
-        <Button mnemonicParsing="false" onAction="#agregarPersona" text="Agregar Persona">
+        <Button mnemonicParsing="false" onAction="#agregarPersona" text="%agregar">
           <HBox.margin>
               <Insets right="25.0" />
           </HBox.margin>
         </Button>
-        <Button mnemonicParsing="false" onAction="#modificarPersona" text="Modificar Persona">
+        <Button mnemonicParsing="false" onAction="#modificarPersona" text="%modificar">
            <HBox.margin>
                <Insets right="25.0" />
            </HBox.margin>
         </Button>
-        <Button mnemonicParsing="false" onAction="#eliminarPersona" text="Eliminar Persona" />
+        <Button mnemonicParsing="false" onAction="#eliminarPersona" text="%eliminar" />
     </HBox>
    <padding>
       <Insets bottom="10.0" left="30.0" right="30.0" top="10.0" />

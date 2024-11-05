@@ -9,6 +9,8 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
+import java.util.ResourceBundle;
+
 /**
  * Controlador para la ventana modal que se abre al agregar una nueva persona.
  */
@@ -37,6 +39,13 @@ public class ControladorModal {
     private Persona persona;
 
     /**
+     * Recurso de texto para obtener cadenas de la interfaz en diferentes idiomas.
+     * Se utiliza para internacionalizar la interfaz gráfica.
+     */
+    @FXML
+    private ResourceBundle resources;
+
+    /**
      * Maneja el evento de cerrar la ventana modal.
      *
      * @param event El evento que activa este metodo.
@@ -63,7 +72,7 @@ public class ControladorModal {
         }
 
         if (esPersonaRepetida()) {
-            mostrarAlertaErrores("Persona repetida");
+            mostrarAlertaErrores(resources.getString("persona.repetida"));
             limpiarCampos();
         } else {
             if (persona != null) {
@@ -71,7 +80,7 @@ public class ControladorModal {
                 persona.setApellidos(txtApellidos.getText());
                 persona.setEdad(Integer.parseInt(txtEdad.getText()));
 
-                mostrarAlertaValido("Persona modificada correctamente.");
+                mostrarAlertaValido(resources.getString("modificar.bien"));
             } else {
                 crearPersona();
             }
@@ -145,26 +154,26 @@ public class ControladorModal {
         String edadInput = txtEdad.getText().trim();
 
         if (nombre.isEmpty()) {
-            errores += "Debes introducir tu nombre.\n";
+            errores += resources.getString("modal.error.nombre") + "\n";
         } else if (!nombre.matches("^[A-Za-záéíóúÁÉÍÓÚÑñ\\s]+$")) {
-            errores += "El nombre no puede contener números.\n";
+            errores += resources.getString("modal.error.nombre.num") + "\n";
         }
 
         if (apellidos.isEmpty()) {
-            errores += "Debes introducir al menos un apellido.\n";
+            errores += resources.getString("modal.error.apellidos") + "\n";
         } else if (!apellidos.matches("^[A-Za-záéíóúÁÉÍÓÚÑñ\\s]+$")) {
-            errores += "Los apellidos no pueden contener números.\n";
+            errores += resources.getString("modal.error.apellidos.num") + "\n";
         }
 
         int edad;
         try {
             edad = Integer.parseInt(edadInput);
         } catch (NumberFormatException e) {
-            return errores + "El campo 'Edad' debe ser numérico.\n";
+            return errores += resources.getString("modal.error.edad") + "\n";
         }
 
         if (edad < 1 || edad > 100) {
-            errores += "Introduce una edad válida (1-100).\n";
+            errores += resources.getString("modal.error.edad.rango") + "\n";
         }
 
         return errores;
@@ -185,7 +194,7 @@ public class ControladorModal {
         persona.setApellidos(apellidos);
         persona.setEdad(edad);
 
-        mostrarAlertaValido("Persona añadida correctamente.");
+        mostrarAlertaValido(resources.getString("aniadir.bien"));
     }
 
     /**

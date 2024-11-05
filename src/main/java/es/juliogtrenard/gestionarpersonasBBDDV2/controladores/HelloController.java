@@ -1,6 +1,7 @@
 package es.juliogtrenard.gestionarpersonasBBDDV2.controladores;
 
 import es.juliogtrenard.gestionarpersonasBBDDV2.dao.DaoPersona;
+import es.juliogtrenard.gestionarpersonasBBDDV2.db.DBConnect;
 import es.juliogtrenard.gestionarpersonasBBDDV2.modelos.Persona;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
@@ -12,12 +13,14 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.MouseEvent;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 import java.io.*;
 import java.util.ArrayList;
+import java.util.Locale;
+import java.util.Properties;
+import java.util.ResourceBundle;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
@@ -51,6 +54,13 @@ public class HelloController {
     private ImageView imgImagen;
 
     /**
+     * Recurso de texto para obtener cadenas de la interfaz en diferentes idiomas.
+     * Se utiliza para internacionalizar la interfaz gráfica.
+     */
+    @FXML
+    private ResourceBundle resources;
+
+    /**
      * Inicializa la lista de personas. Además, llama a la función filtrarLista
      */
     @FXML
@@ -69,8 +79,8 @@ public class HelloController {
             if (event.getClickCount() == 2) {
                 ContextMenu menuContextual = new ContextMenu();
 
-                MenuItem modificar = new MenuItem("Modificar");
-                MenuItem eliminar = new MenuItem("Eliminar");
+                MenuItem modificar = new MenuItem(resources.getString("modificar"));
+                MenuItem eliminar = new MenuItem(resources.getString("eliminar"));
 
                 modificar.setOnAction(_ -> {
                     try {
@@ -121,8 +131,13 @@ public class HelloController {
      */
     @FXML
     public void agregarPersona(ActionEvent event) throws IOException {
+        Properties properties = DBConnect.getConfiguracion();
+        String language = properties.getProperty("language");
+        Locale locale = new Locale.Builder().setLanguage(language).build();
+        ResourceBundle bundle = ResourceBundle.getBundle("es/juliogtrenard/gestionarpersonasBBDDV2/languages/lang", locale);
+
         Stage stage = new Stage();
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/es/juliogtrenard/gestionarpersonasBBDDV2/fxml/modal.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/es/juliogtrenard/gestionarpersonasBBDDV2/fxml/modal.fxml"), bundle);
         Parent root = loader.load();
 
         stage.setScene(new Scene(root));
@@ -149,7 +164,7 @@ public class HelloController {
                 tvTabla.getItems().add(persona);
                 tvTabla.refresh();
             } else {
-                error("Error al añadir la persona");
+                error(resources.getString("aniadir.fallo"));
             }
         }
     }
@@ -163,19 +178,24 @@ public class HelloController {
     public void modificarPersona() throws IOException {
         Persona personaSeleccionada = tvTabla.getSelectionModel().getSelectedItem();
         if (personaSeleccionada == null) {
-            error("Seleccione una persona.");
+            error(resources.getString("no.seleccionado"));
             return;
         }
 
+        Properties properties = DBConnect.getConfiguracion();
+        String language = properties.getProperty("language");
+        Locale locale = new Locale.Builder().setLanguage(language).build();
+        ResourceBundle bundle = ResourceBundle.getBundle("es/juliogtrenard/gestionarpersonasBBDDV2/languages/lang", locale);
+
         Stage stage = new Stage();
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/es/juliogtrenard/gestionarpersonasBBDDV2/fxml/modal.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/es/juliogtrenard/gestionarpersonasBBDDV2/fxml/modal.fxml"), bundle);
         Parent root = loader.load();
 
         ControladorModal controller = loader.getController();
         controller.setPersona(personaSeleccionada);
 
         stage.setScene(new Scene(root));
-        stage.setTitle("Editar Persona");
+        stage.setTitle(resources.getString("modificar"));
         stage.getIcons().add(new Image(String.valueOf(getClass().getResource("/es/juliogtrenard/gestionarpersonasBBDDV2/img/library_icon.png"))));
 
         stage.setMinWidth(500);
@@ -205,7 +225,7 @@ public class HelloController {
     public void eliminarPersona() {
         Persona personaSeleccionada = tvTabla.getSelectionModel().getSelectedItem();
         if (personaSeleccionada == null) {
-            error("Seleccione una persona.");
+            error(resources.getString("no.seleccionado"));
             return;
         }
 
@@ -213,7 +233,7 @@ public class HelloController {
         listaPersonas.remove(personaSeleccionada);
         tvTabla.getItems().remove(personaSeleccionada);
 
-        confirmacion("Persona eliminada correctamente.");
+        confirmacion(resources.getString("eliminar.bien"));
     }
 
     /**
