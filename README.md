@@ -1,11 +1,12 @@
 # Título del proyecto
 
-GestionarPersonasBBDD
+GestionarPersonasBBDDV2
 
 ## Descripción
 
 Aplicación con JavaFX que guarda la información de una persona en una tabla, a partir de una ventana emergente. 
 También permite modificar o eliminar una persona existente en la tabla y filtrar los registros por nombre. Guarda los datos en una base de datos.
+Mejora el estilo y usabilidad de la aplicación.
 
 ## Primeros pasos
 

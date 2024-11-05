@@ -9,11 +9,10 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
@@ -61,9 +60,34 @@ public class HelloController {
         filtrarLista();
         tvTabla.getItems().addAll(listaPersonas);
 
-        //Imagen
+        // Imagen
         Image imagen = new Image(String.valueOf(getClass().getResource("/es/juliogtrenard/gestionarpersonasBBDDV2/img/contactos.jpeg")));
         imgImagen.setImage(imagen);
+
+        // Menú contextual
+        tvTabla.setOnMouseClicked(event -> {
+            if (event.getClickCount() == 2) {
+                ContextMenu menuContextual = new ContextMenu();
+
+                MenuItem modificar = new MenuItem("Modificar");
+                MenuItem eliminar = new MenuItem("Eliminar");
+
+                modificar.setOnAction(_ -> {
+                    try {
+                        modificarPersona();
+                    } catch (IOException e) {
+                        throw new RuntimeException(e);
+                    }
+                });
+
+                eliminar.setOnAction(_ -> eliminarPersona());
+
+                menuContextual.getItems().addAll(modificar, eliminar);
+
+                // Mostrar menú contextual en la posición del cursor
+                menuContextual.show(tvTabla, event.getScreenX(), event.getScreenY());
+            }
+        });
     }
 
     /**
@@ -134,11 +158,9 @@ public class HelloController {
      * Maneja el evento de modificar una persona existente en la lista.
      * Abre una ventana modal con el formulario para editar los datos de la persona seleccionada.
      * Si la persona se edita correctamente, se actualiza en la lista y en la tabla.
-     *
-     * @param event El evento que activa este metodo.
      */
     @FXML
-    public void modificarPersona(ActionEvent event) throws IOException {
+    public void modificarPersona() throws IOException {
         Persona personaSeleccionada = tvTabla.getSelectionModel().getSelectedItem();
         if (personaSeleccionada == null) {
             error("Seleccione una persona.");
@@ -162,7 +184,7 @@ public class HelloController {
         stage.setMaxHeight(200);
 
         stage.initModality(Modality.WINDOW_MODAL);
-        stage.initOwner(((Node) event.getSource()).getScene().getWindow());
+        stage.initOwner(tvTabla.getScene().getWindow());
         stage.showAndWait();
 
         if (controller.getPersona() != null) {
