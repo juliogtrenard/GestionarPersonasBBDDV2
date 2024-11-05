@@ -100,7 +100,7 @@ public class ControladorModal {
         alerta.setHeaderText(null);
         alerta.setTitle("ERROR:");
         Stage stage = (Stage) alerta.getDialogPane().getScene().getWindow();
-        stage.getIcons().add(new Image(String.valueOf(getClass().getResource("/img/library_icon.png"))));
+        stage.getIcons().add(new Image(String.valueOf(getClass().getResource("/es/juliogtrenard/gestionarpersonasBBDDV2/img/contactos.jpeg"))));
         alerta.showAndWait();
     }
 
@@ -196,7 +196,7 @@ public class ControladorModal {
         alerta.setHeaderText(null);
         alerta.setTitle("INFO:");
         Stage stage = (Stage) alerta.getDialogPane().getScene().getWindow();
-        stage.getIcons().add(new Image(String.valueOf(getClass().getResource("/img/library_icon.png"))));
+        stage.getIcons().add(new Image(String.valueOf(getClass().getResource("/es/juliogtrenard/gestionarpersonasBBDDV2/img/library_icon.png"))));
         alerta.showAndWait();
     }
 

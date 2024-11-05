@@ -31,10 +31,10 @@ public class HelloApplication extends Application {
      */
     @Override
     public void start(Stage stage) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("hello-view.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("/es/juliogtrenard/gestionarpersonasBBDDV2/fxml/hello-view.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), 750, 450);
 
-        stage.getIcons().add(new Image(String.valueOf(getClass().getResource("/img/library_icon.png"))));
+        stage.getIcons().add(new Image(String.valueOf(getClass().getResource("/es/juliogtrenard/gestionarpersonasBBDDV2/img/library_icon.png"))));
 
         stage.setTitle("PERSONAS");
         stage.setScene(scene);

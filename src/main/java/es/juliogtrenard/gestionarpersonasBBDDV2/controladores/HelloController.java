@@ -13,6 +13,7 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
@@ -45,6 +46,12 @@ public class HelloController {
     private TextField txtFiltrarNombre;
 
     /**
+     * Imagen
+     */
+    @FXML
+    private ImageView imgImagen;
+
+    /**
      * Inicializa la lista de personas. Además, llama a la función filtrarLista
      */
     @FXML
@@ -53,6 +60,10 @@ public class HelloController {
         listaPersonas = DaoPersona.cargarListado();
         filtrarLista();
         tvTabla.getItems().addAll(listaPersonas);
+
+        //Imagen
+        Image imagen = new Image(String.valueOf(getClass().getResource("/es/juliogtrenard/gestionarpersonasBBDDV2/img/contactos.jpeg")));
+        imgImagen.setImage(imagen);
     }
 
     /**
@@ -87,11 +98,12 @@ public class HelloController {
     @FXML
     public void agregarPersona(ActionEvent event) throws IOException {
         Stage stage = new Stage();
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/es/juliogtrenard/gestionarpersonasBBDDV2/modal.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/es/juliogtrenard/gestionarpersonasBBDDV2/fxml/modal.fxml"));
         Parent root = loader.load();
 
         stage.setScene(new Scene(root));
         stage.setTitle("Nueva Persona");
+        stage.getIcons().add(new Image(String.valueOf(getClass().getResource("/es/juliogtrenard/gestionarpersonasBBDDV2/img/library_icon.png"))));
 
         stage.setMinWidth(500);
         stage.setMinHeight(200);
@@ -134,7 +146,7 @@ public class HelloController {
         }
 
         Stage stage = new Stage();
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/es/juliogtrenard/gestionarpersonasBBDDV2/modal.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/es/juliogtrenard/gestionarpersonasBBDDV2/fxml/modal.fxml"));
         Parent root = loader.load();
 
         ControladorModal controller = loader.getController();
@@ -142,6 +154,7 @@ public class HelloController {
 
         stage.setScene(new Scene(root));
         stage.setTitle("Editar Persona");
+        stage.getIcons().add(new Image(String.valueOf(getClass().getResource("/es/juliogtrenard/gestionarpersonasBBDDV2/img/library_icon.png"))));
 
         stage.setMinWidth(500);
         stage.setMinHeight(200);
@@ -191,7 +204,7 @@ public class HelloController {
         alerta.setHeaderText(null);
         alerta.setTitle("ERROR:");
         Stage stage = (Stage) alerta.getDialogPane().getScene().getWindow();
-        stage.getIcons().add(new Image(String.valueOf(getClass().getResource("/img/library_icon.png"))));
+        stage.getIcons().add(new Image(String.valueOf(getClass().getResource("/es/juliogtrenard/gestionarpersonasBBDDV2/img/library_icon.png"))));
         alerta.showAndWait();
     }
 
@@ -205,7 +218,7 @@ public class HelloController {
         alerta.setHeaderText(null);
         alerta.setTitle("INFO:");
         Stage stage = (Stage) alerta.getDialogPane().getScene().getWindow();
-        stage.getIcons().add(new Image(String.valueOf(getClass().getResource("/img/library_icon.png"))));
+        stage.getIcons().add(new Image(String.valueOf(getClass().getResource("/es/juliogtrenard/gestionarpersonasBBDDV2/img/library_icon.png"))));
         alerta.showAndWait();
     }
 }
