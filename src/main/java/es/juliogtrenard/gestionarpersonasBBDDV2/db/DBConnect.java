@@ -1,5 +1,9 @@
 package es.juliogtrenard.gestionarpersonasBBDDV2.db;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DatabaseMetaData;
 import java.sql.DriverManager;
@@ -13,16 +17,17 @@ public class DBConnect {
     private final Connection connection;
 
     /**
-     * Contructor que lanza la conexión
+     * Constructor que lanza la conexión
      *
      * @throws java.sql.SQLException Controlar errores
      */
     public DBConnect() throws SQLException {
+        Properties configuracion = getConfiguracion();
         Properties connConfig = new Properties();
         connConfig.setProperty("user", "root");
         connConfig.setProperty("password", "mypass");
 
-        connection = DriverManager.getConnection("jdbc:mariadb://127.0.0.1:33066/personas?serverTimezone=Europe/Madrid", connConfig);
+        connection = DriverManager.getConnection("jdbc:mariadb://" + configuracion.getProperty("address") + ":" + configuracion.getProperty("port") + "/" + configuracion.getProperty("database") + "?serverTimezone=Europe/Madrid", connConfig);
         connection.setAutoCommit(true);
         DatabaseMetaData databaseMetaData = connection.getMetaData();
 
@@ -35,6 +40,30 @@ public class DBConnect {
         System.out.println("----------------------------------------------------------------");
         System.out.println();
         connection.setAutoCommit(true);*/
+    }
+
+    /**
+     * Da la configuración para la conexión a la base de datos
+     *
+     * @return Properties con los datos de conexión a la base de datos
+     */
+    public static Properties getConfiguracion() {
+        File f = new File("configuracion.properties");
+        Properties properties;
+        try {
+            FileInputStream configFileReader=new FileInputStream(f);
+            properties = new Properties();
+            try {
+                properties.load(configFileReader);
+                configFileReader.close();
+            } catch (IOException e) {
+                System.out.println(e.getMessage());
+            }
+        } catch (FileNotFoundException e) {
+            System.out.println(e.getMessage());
+            throw new RuntimeException("configuracion.properties not found at config file path " + f.getPath());
+        }
+        return properties;
     }
 
     /**
