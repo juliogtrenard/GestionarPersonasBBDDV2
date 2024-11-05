@@ -6,7 +6,7 @@
 <?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
 
-<VBox stylesheets="@../css/style.css" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="450.0" prefWidth="750.0" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="es.juliogtrenard.gestionarpersonasBBDDV2.controladores.HelloController">
+<VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="450.0" prefWidth="750.0" stylesheets="@../css/style.css" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="es.juliogtrenard.gestionarpersonasBBDDV2.controladores.HelloController">
     <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
         <ImageView fx:id="imgImagen" fitHeight="100.0" fitWidth="70.0" pickOnBounds="true" preserveRatio="true">
          <HBox.margin>
@@ -46,16 +46,26 @@
     </TableView>
     <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
         <Button mnemonicParsing="false" onAction="#agregarPersona" text="%agregar">
+            <tooltip>
+                <Tooltip text="%tooltip.aniadir" />
+            </tooltip>
           <HBox.margin>
               <Insets right="25.0" />
           </HBox.margin>
         </Button>
         <Button mnemonicParsing="false" onAction="#modificarPersona" text="%modificar">
+            <tooltip>
+                <Tooltip text="%tooltip.modificar" />
+            </tooltip>
            <HBox.margin>
                <Insets right="25.0" />
            </HBox.margin>
         </Button>
-        <Button mnemonicParsing="false" onAction="#eliminarPersona" text="%eliminar" />
+        <Button mnemonicParsing="false" onAction="#eliminarPersona" text="%eliminar">
+            <tooltip>
+                <Tooltip text="%tooltip.eliminar" />
+            </tooltip>
+        </Button>
     </HBox>
    <padding>
       <Insets bottom="10.0" left="30.0" right="30.0" top="10.0" />
